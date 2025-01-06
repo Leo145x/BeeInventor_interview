@@ -1,0 +1,31 @@
+openapi: 3.1.0
+info:
+  title: sample API
+  description: This API demonstrates path splitting.
+  version: 1.0.0
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+
+servers:
+  - url: https://api.example.com/v1
+    description: Example server
+
+paths:
+  /v1/user/books:
+    get:
+      $ref: "./paths/books.yaml#/get"
+    post:
+      $ref: "./paths/books.yaml#/post"
+  /v1/user/texts:
+    get:
+      $ref: "./paths/texts.yaml#/get"
+    post:
+      $ref: "./paths/texts.yaml#/post"
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

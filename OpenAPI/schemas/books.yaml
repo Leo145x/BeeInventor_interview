@@ -1,0 +1,101 @@
+GET:
+  Response:
+    type: array
+    description: Array of books.
+    items:
+      type: object
+      properties:
+        title:
+          type: string
+          description: The title of book
+          example: "Harry Potter"
+        author:
+          type: string
+          description: The author of the book
+          example: "J. K. Rowling"
+        publisher:
+          type: string
+          description: The publisher of the book
+          example: "Bloomsbury Publishing"
+        publication_year:
+          type: integer
+          description: The year the book was published
+          example: 1997
+        pages:
+          type: integer
+          description: The number of pages in the book
+          example: 223
+        language:
+          type: string
+          description: The language of the book
+          example: "en"
+        summary:
+          type: string
+          description: A brief summary of the book
+          example: "A young wizard discovers his magical heritage and attends Hogwarts School of Witchcraft and Wizardry."
+        no:
+          type: integer
+          description: The book index number
+          example: 1
+    example: [
+    {
+      title: "Harry Potter",
+      author: "J. K. Rowling",
+      publisher: "Bloomsbury Publishing",
+      publication_year: 1997,
+      pages: 223,
+      language: "en",
+      summary: "A young wizard discovers his magical heritage and attends Hogwarts School of Witchcraft and Wizardry.",
+      no: 1
+    },
+    {
+      title: "The Hobbit",
+      author: "J. R. R. Tolkien",
+      publisher: "George Allen & Unwin",
+      publication_year: 1937,
+      pages: 310,
+      language: "en",
+      summary: "A hobbit named Bilbo Baggins",
+      no: 2}
+      ]
+
+POST:
+  Request:
+    type: object
+    properties:
+      title:
+        type: object
+        description: Details of the book
+        example: "Harry Potter"
+      author:
+        type: string
+        description: The author of the book
+        example: "J. K. Rowling"
+      publisher:
+        type: string
+        description: The publisher of the book
+        example: "Bloomsbury Publishing"
+      publication_year:
+        type: integer
+        description: The year the book was published
+        example: 1997
+      pages:
+        type: integer
+        description: The number of pages in the book
+        example: 223
+      language:
+        type: string
+        description: The language of the book
+        example: "en"
+      summary:
+        type: string
+        description: A brief summary of the book
+        example: "A young wizard discovers his magical heritage and attends Hogwarts School of Witchcraft and Wizardry."
+    required:
+      - title
+      - author
+      - publisher
+      - publication_year
+      - pages
+      - language
+      - summary

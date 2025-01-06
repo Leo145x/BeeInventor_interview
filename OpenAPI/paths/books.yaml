@@ -1,0 +1,129 @@
+get:
+  tags:
+    - "Books"
+  security:
+    - bearerAuth: []
+  summary: Get user's books
+  description: Retrieve a array of books.
+  parameters:
+    - name: title
+      in: query
+      required: false
+      description: Retrieve book by user key in keyword.
+      schema:
+        type: string
+        example: "Harry Potter"
+  responses:
+    "200":
+      description: A array of books
+      content:
+        application/json:
+          schema:
+            $ref: "../schemas/books.yaml#/GET/Response"
+    "401":
+      description: When the request signature is not valid
+      content:
+        application/json:
+          schema:
+            $ref: "../http-schemas/http.yaml#/HTTP/4XX"
+          examples:
+            E401-1:
+              $ref: "../http-schemas/http-error.yaml#/401/E401-1"
+    "404":
+      description: When book resource not found
+      content:
+        application/json:
+          schema:
+            $ref: "../http-schemas/http.yaml#/HTTP/4XX"
+          examples:
+            E404-1:
+              $ref: "../http-schemas/http-error.yaml#/404/E404-1"
+    "429":
+      description: When the request limit is exceeded
+      content:
+        application/json:
+          schema:
+            $ref: "../http-schemas/http.yaml#/HTTP/4XX"
+          examples:
+            E401-1:
+              $ref: "../http-schemas/http-error.yaml#/429/E429-1"
+    "500":
+      description: When server encountered an unexpected condition
+      content:
+        application/json:
+          schema:
+            $ref: "../http-schemas/http.yaml#/HTTP/5XX"
+          examples:
+            E500-1:
+              $ref: "../http-schemas/http-error.yaml#/500/E500-1"
+    "503":
+      description: When service is temporarily unavailable
+      content:
+        application/json:
+          schema:
+            $ref: "../http-schemas/http.yaml#/HTTP/5XX"
+          examples:
+            E503-1:
+              $ref: "../http-schemas/http-error.yaml#/503/E503-1"
+
+post:
+  tags:
+    - "Books"
+  security:
+    - bearerAuth: []
+  summary: Post book
+  description: Post new book or modify book.
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: "../schemas/books.yaml#/POST/Request"
+  responses:
+    "201":
+      description: When the book create successfully
+    "400":
+      description: Request body is Malformed
+      content:
+        application/json:
+          schema:
+            $ref: "../http-schemas/http.yaml#/HTTP/4XX"
+          examples:
+            E400-1:
+              $ref: "../http-schemas/http-error.yaml#/400/E400-1"
+    "401":
+      description: When the request signature is not valid
+      content:
+        application/json:
+          schema:
+            $ref: "../http-schemas/http.yaml#/HTTP/4XX"
+          examples:
+            E401-1:
+              $ref: "../http-schemas/http-error.yaml#/401/E401-1"
+    "429":
+      description: When the request limit is exceeded
+      content:
+        application/json:
+          schema:
+            $ref: "../http-schemas/http.yaml#/HTTP/4XX"
+          examples:
+            E401-1:
+              $ref: "../http-schemas/http-error.yaml#/429/E429-1"
+    "500":
+      description: When server encountered an unexpected condition
+      content:
+        application/json:
+          schema:
+            $ref: "../http-schemas/http.yaml#/HTTP/5XX"
+          examples:
+            E500-1:
+              $ref: "../http-schemas/http-error.yaml#/500/E500-1"
+    "503":
+      description: When service is temporarily unavailable
+      content:
+        application/json:
+          schema:
+            $ref: "../http-schemas/http.yaml#/HTTP/5XX"
+          examples:
+            E503-1:
+              $ref: "../http-schemas/http-error.yaml#/503/E503-1"

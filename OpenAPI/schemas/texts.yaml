@@ -1,0 +1,36 @@
+GET:
+  Response:
+    type: array
+    description: Array of texts.
+    items:
+      type: object
+      properties:
+        text: 
+          type: string
+          description: The user's text
+          example: "Hello, word. This is my text zone."
+        no:
+          type: integer
+          description: The text index number
+          example: 1
+    example: [
+    {
+      "text": "Hello, word. This is my text zone.",
+      "no": 1
+    },
+    {
+      "text": "Today is sunny day!",
+      "no":2
+    }
+    ]
+
+POST:
+  Request:
+    type: object
+    properties:
+      text: 
+        type: string
+        description: The user's text
+        example: "Hello, word. This is my text zone."
+    required:
+      - text

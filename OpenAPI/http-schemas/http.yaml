@@ -1,0 +1,19 @@
+HTTP:
+  4XX:
+    type: object
+    properties:
+      code:
+        description: Error Code
+        type: string
+      message:
+        description: Error Message
+        type: string
+  5XX:
+    type: object
+    properties:
+      code:
+        description: Error Code
+        type: string
+      message:
+        description: Error Message
+        type: string

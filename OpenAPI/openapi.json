@@ -1,0 +1,897 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "sample API",
+    "description": "This API demonstrates path splitting.",
+    "version": "1.0.0",
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://api.example.com/v1",
+      "description": "Example server"
+    }
+  ],
+  "paths": {
+    "/v1/user/books": {
+      "get": {
+        "tags": [
+          "Books"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "summary": "Get user's books",
+        "description": "Retrieve a array of books.",
+        "parameters": [
+          {
+            "name": "title",
+            "in": "query",
+            "required": false,
+            "description": "Retrieve book by user key in keyword.",
+            "schema": {
+              "type": "string",
+              "example": "Harry Potter"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A array of books",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "description": "Array of books.",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "title": {
+                        "type": "string",
+                        "description": "The title of book",
+                        "example": "Harry Potter"
+                      },
+                      "author": {
+                        "type": "string",
+                        "description": "The author of the book",
+                        "example": "J. K. Rowling"
+                      },
+                      "publisher": {
+                        "type": "string",
+                        "description": "The publisher of the book",
+                        "example": "Bloomsbury Publishing"
+                      },
+                      "publication_year": {
+                        "type": "integer",
+                        "description": "The year the book was published",
+                        "example": 1997
+                      },
+                      "pages": {
+                        "type": "integer",
+                        "description": "The number of pages in the book",
+                        "example": 223
+                      },
+                      "language": {
+                        "type": "string",
+                        "description": "The language of the book",
+                        "example": "en"
+                      },
+                      "summary": {
+                        "type": "string",
+                        "description": "A brief summary of the book",
+                        "example": "A young wizard discovers his magical heritage and attends Hogwarts School of Witchcraft and Wizardry."
+                      },
+                      "no": {
+                        "type": "integer",
+                        "description": "The book index number",
+                        "example": 1
+                      }
+                    }
+                  },
+                  "example": [
+                    {
+                      "title": "Harry Potter",
+                      "author": "J. K. Rowling",
+                      "publisher": "Bloomsbury Publishing",
+                      "publication_year": 1997,
+                      "pages": 223,
+                      "language": "en",
+                      "summary": "A young wizard discovers his magical heritage and attends Hogwarts School of Witchcraft and Wizardry.",
+                      "no": 1
+                    },
+                    {
+                      "title": "The Hobbit",
+                      "author": "J. R. R. Tolkien",
+                      "publisher": "George Allen & Unwin",
+                      "publication_year": 1937,
+                      "pages": 310,
+                      "language": "en",
+                      "summary": "A hobbit named Bilbo Baggins",
+                      "no": 2
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "When the request signature is not valid",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "description": "Error Code",
+                      "type": "string"
+                    },
+                    "message": {
+                      "description": "Error Message",
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "E401-1": {
+                    "summary": "Request token is not legal",
+                    "value": {
+                      "code": "E401-1",
+                      "message": "Request token is not legal"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "When book resource not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "description": "Error Code",
+                      "type": "string"
+                    },
+                    "message": {
+                      "description": "Error Message",
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "E404-1": {
+                    "summary": "Resource not found",
+                    "value": {
+                      "code": "E404-1",
+                      "message": "Resouce not found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "When the request limit is exceeded",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "description": "Error Code",
+                      "type": "string"
+                    },
+                    "message": {
+                      "description": "Error Message",
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "E401-1": {
+                    "summary": "Too Many Requests",
+                    "value": {
+                      "code": "E429-1",
+                      "message": "Too Many Requests"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "When server encountered an unexpected condition",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "description": "Error Code",
+                      "type": "string"
+                    },
+                    "message": {
+                      "description": "Error Message",
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "E500-1": {
+                    "summary": "Internal Server Error",
+                    "value": {
+                      "code": "E500-1",
+                      "message": "Internal Server Error"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "When service is temporarily unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "description": "Error Code",
+                      "type": "string"
+                    },
+                    "message": {
+                      "description": "Error Message",
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "E503-1": {
+                    "summary": "Temporarily unavailable",
+                    "value": {
+                      "code": "E503-1",
+                      "message": "Temporarily unavailable"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Books"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "summary": "Post book",
+        "description": "Post new book or modify book.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "object",
+                    "description": "Details of the book",
+                    "example": "Harry Potter"
+                  },
+                  "author": {
+                    "type": "string",
+                    "description": "The author of the book",
+                    "example": "J. K. Rowling"
+                  },
+                  "publisher": {
+                    "type": "string",
+                    "description": "The publisher of the book",
+                    "example": "Bloomsbury Publishing"
+                  },
+                  "publication_year": {
+                    "type": "integer",
+                    "description": "The year the book was published",
+                    "example": 1997
+                  },
+                  "pages": {
+                    "type": "integer",
+                    "description": "The number of pages in the book",
+                    "example": 223
+                  },
+                  "language": {
+                    "type": "string",
+                    "description": "The language of the book",
+                    "example": "en"
+                  },
+                  "summary": {
+                    "type": "string",
+                    "description": "A brief summary of the book",
+                    "example": "A young wizard discovers his magical heritage and attends Hogwarts School of Witchcraft and Wizardry."
+                  }
+                },
+                "required": [
+                  "title",
+                  "author",
+                  "publisher",
+                  "publication_year",
+                  "pages",
+                  "language",
+                  "summary"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "When the book create successfully"
+          },
+          "400": {
+            "description": "Request body is Malformed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "description": "Error Code",
+                      "type": "string"
+                    },
+                    "message": {
+                      "description": "Error Message",
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "E400-1": {
+                    "summary": "Malformed book name",
+                    "value": {
+                      "code": "E400-1",
+                      "message": "The request body is missing one or more required fields. Please ensure all required fields are included.",
+                      "missing_fields": [
+                        "field_name_1",
+                        "field_name_2"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "When the request signature is not valid",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "description": "Error Code",
+                      "type": "string"
+                    },
+                    "message": {
+                      "description": "Error Message",
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "E401-1": {
+                    "summary": "Request token is not legal",
+                    "value": {
+                      "code": "E401-1",
+                      "message": "Request token is not legal"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "When the request limit is exceeded",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "description": "Error Code",
+                      "type": "string"
+                    },
+                    "message": {
+                      "description": "Error Message",
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "E401-1": {
+                    "summary": "Too Many Requests",
+                    "value": {
+                      "code": "E429-1",
+                      "message": "Too Many Requests"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "When server encountered an unexpected condition",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "description": "Error Code",
+                      "type": "string"
+                    },
+                    "message": {
+                      "description": "Error Message",
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "E500-1": {
+                    "summary": "Internal Server Error",
+                    "value": {
+                      "code": "E500-1",
+                      "message": "Internal Server Error"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "When service is temporarily unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "description": "Error Code",
+                      "type": "string"
+                    },
+                    "message": {
+                      "description": "Error Message",
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "E503-1": {
+                    "summary": "Temporarily unavailable",
+                    "value": {
+                      "code": "E503-1",
+                      "message": "Temporarily unavailable"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/user/texts": {
+      "get": {
+        "tags": [
+          "Texts"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "summary": "Get user's texts",
+        "description": "Retrieve a array of texts.",
+        "parameters": [
+          {
+            "name": "text",
+            "in": "query",
+            "required": false,
+            "description": "Retrieve text by user key in keyword.",
+            "schema": {
+              "type": "string",
+              "example": "Hello, word"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A array of texts",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "description": "Array of texts.",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "text": {
+                        "type": "string",
+                        "description": "The user's text",
+                        "example": "Hello, word. This is my text zone."
+                      },
+                      "no": {
+                        "type": "integer",
+                        "description": "The text index number",
+                        "example": 1
+                      }
+                    }
+                  },
+                  "example": [
+                    {
+                      "text": "Hello, word. This is my text zone.",
+                      "no": 1
+                    },
+                    {
+                      "text": "Today is sunny day!",
+                      "no": 2
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "When the request signature is not valid",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "description": "Error Code",
+                      "type": "string"
+                    },
+                    "message": {
+                      "description": "Error Message",
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "E401-1": {
+                    "summary": "Request token is not legal",
+                    "value": {
+                      "code": "E401-1",
+                      "message": "Request token is not legal"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "When book resource not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "description": "Error Code",
+                      "type": "string"
+                    },
+                    "message": {
+                      "description": "Error Message",
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "E404-1": {
+                    "summary": "Resource not found",
+                    "value": {
+                      "code": "E404-1",
+                      "message": "Resouce not found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "When the request limit is exceeded",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "description": "Error Code",
+                      "type": "string"
+                    },
+                    "message": {
+                      "description": "Error Message",
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "E401-1": {
+                    "summary": "Too Many Requests",
+                    "value": {
+                      "code": "E429-1",
+                      "message": "Too Many Requests"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "When server encountered an unexpected condition",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "description": "Error Code",
+                      "type": "string"
+                    },
+                    "message": {
+                      "description": "Error Message",
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "E500-1": {
+                    "summary": "Internal Server Error",
+                    "value": {
+                      "code": "E500-1",
+                      "message": "Internal Server Error"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "When service is temporarily unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "description": "Error Code",
+                      "type": "string"
+                    },
+                    "message": {
+                      "description": "Error Message",
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "E503-1": {
+                    "summary": "Temporarily unavailable",
+                    "value": {
+                      "code": "E503-1",
+                      "message": "Temporarily unavailable"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Texts"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "summary": "Post text",
+        "description": "Post new text or modify text.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "text": {
+                    "type": "string",
+                    "description": "The user's text",
+                    "example": "Hello, word. This is my text zone."
+                  }
+                },
+                "required": [
+                  "text"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "When the book create successfully"
+          },
+          "400": {
+            "description": "Request body is Malformed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "description": "Error Code",
+                      "type": "string"
+                    },
+                    "message": {
+                      "description": "Error Message",
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "E400-1": {
+                    "summary": "Malformed book name",
+                    "value": {
+                      "code": "E400-1",
+                      "message": "The request body is missing one or more required fields. Please ensure all required fields are included.",
+                      "missing_fields": [
+                        "field_name_1",
+                        "field_name_2"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "When the request signature is not valid",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "description": "Error Code",
+                      "type": "string"
+                    },
+                    "message": {
+                      "description": "Error Message",
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "E401-1": {
+                    "summary": "Request token is not legal",
+                    "value": {
+                      "code": "E401-1",
+                      "message": "Request token is not legal"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "When the request limit is exceeded",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "description": "Error Code",
+                      "type": "string"
+                    },
+                    "message": {
+                      "description": "Error Message",
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "E401-1": {
+                    "summary": "Too Many Requests",
+                    "value": {
+                      "code": "E429-1",
+                      "message": "Too Many Requests"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "When server encountered an unexpected condition",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "description": "Error Code",
+                      "type": "string"
+                    },
+                    "message": {
+                      "description": "Error Message",
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "E500-1": {
+                    "summary": "Internal Server Error",
+                    "value": {
+                      "code": "E500-1",
+                      "message": "Internal Server Error"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "When service is temporarily unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "description": "Error Code",
+                      "type": "string"
+                    },
+                    "message": {
+                      "description": "Error Message",
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "E503-1": {
+                    "summary": "Temporarily unavailable",
+                    "value": {
+                      "code": "E503-1",
+                      "message": "Temporarily unavailable"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}

@@ -1,0 +1,45 @@
+"400":
+  E400-1:
+    summary: Malformed book name
+    value:
+      code: "E400-1"
+      message: "The request body is missing one or more required fields. Please ensure all required fields are included."
+      missing_fields: ["field_name_1", "field_name_2"]
+"401":
+  E401-1:
+    summary: Request token is not legal
+    value:
+      code: "E401-1"
+      message: "Request token is not legal"
+
+"403":
+  E403-1:
+    summary: Operator permission is denied
+    value:
+      code: "E403-1"
+      message: "Operator permission is denied"
+
+"404":
+  E404-1:
+    summary: Resource not found
+    value:
+      code: "E404-1"
+      message: "Resouce not found"
+"429":
+  E429-1:
+    summary: Too Many Requests
+    value:
+      code: "E429-1"
+      message: "Too Many Requests"
+"500":
+  E500-1:
+    summary: Internal Server Error
+    value:
+      code: "E500-1"
+      message: "Internal Server Error"
+"503":
+  E503-1:
+    summary: Temporarily unavailable
+    value:
+      code: "E503-1"
+      message: "Temporarily unavailable"
